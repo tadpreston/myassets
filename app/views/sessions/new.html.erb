@@ -1,0 +1,17 @@
+<h1>Login</h1>
+
+<div>
+  <%= form_with url: sessions_path do |form| %>
+    <div>
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </div>
+    <div>
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </div>
+    <div>
+      <%= submit_tag "Login" %>
+    </div>
+  <% end %>
+</div>
