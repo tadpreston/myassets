@@ -1,16 +1,10 @@
 class UsersController < ApplicationController
-  before_action :require_login, only: [:index, :show, :edit, :update, :destroy]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, only: [:show, :edit, :update, :destroy]
-
-  def show
-  end
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def new
     @user = User.new
-  end
-
-  def edit
   end
 
   def create
@@ -47,6 +41,6 @@ class UsersController < ApplicationController
   end
 
   def authorize_user
-    redirect_to root_url, error: 'You are not authorized to accesss this' unless current_user.id == @user.id
+    redirect_to root_url, error: 'You are not authorized to accesss this' unless current_user.id == params[:id].to_i
   end
 end
