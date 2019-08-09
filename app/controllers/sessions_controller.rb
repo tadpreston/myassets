@@ -4,8 +4,8 @@ class SessionsController < ApplicationController
       session[:current_user_id] = user.id
       redirect_to root_url, notice: "Welcome Back!"
     else
-      flash.now[:error] = "Could not log you in"
-      render :new
+      flash[:error] = "Could not log you in"
+      redirect_to new_session_path
     end
   end
 
