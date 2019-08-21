@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    redirect_to new_session_path, alert: "Not Authorized!" unless current_user
+    redirect_to new_session_path, alert: "Not Authorized!" unless current_user.present?
   end
 end

@@ -27,7 +27,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+    session[:current_user_id] = nil
+    redirect_to root_url, notice: 'User was successfully destroyed.'
   end
 
   private
