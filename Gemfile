@@ -28,6 +28,8 @@ gem 'sidekiq', '~> 5.1'
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.13'
 
+gem 'pundit', '~> 2.1'
+
 # Use Clockwork for recurring background tasks without needing cron
 # gem 'clockwork', '~> 2.0'
 
