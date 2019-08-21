@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+
+  rescue_from Pundit::NotAuthorizedError, with: :not_authorized_response
+
   protect_from_forgery with: :exception
 
   helper_method :current_user
@@ -12,5 +16,9 @@ class ApplicationController < ActionController::Base
 
   def require_login
     redirect_to new_session_path, alert: "Not Authorized!" unless current_user.present?
+  end
+
+  def not_authorized_response
+    redirect_to root_url, error: 'You are not authorized to accesss this'
   end
 end

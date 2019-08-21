@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -34,14 +33,10 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = authorize User.find(params[:id])
   end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation)
-  end
-
-  def authorize_user
-    redirect_to root_url, error: 'You are not authorized to accesss this' unless current_user.id == params[:id].to_i
   end
 end
