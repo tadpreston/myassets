@@ -23,10 +23,6 @@ RSpec.describe User, type: :model do
     let(:password) { "supersekret" }
     let(:email) { "test@testing.com" }
 
-    before do
-      create(:user,  email: email, password: password, password_confirmation: password)
-    end
-
     context "with valid user and credentials" do
       it "returns a user" do
         expect(User.authenticate(email, password)).to be_a(User)

@@ -13,8 +13,6 @@ RSpec.describe SessionsController, type: :controller do
     let(:password) { "secretpassword" }
     let(:email) { "homer@simpson.com" }
 
-    before { create(:user, email: email, password: password, password_confirmation: password) }
-
     context "with valid_credentials" do
       it "redirects to the home page" do
         get :create, params: { email: email, password: password }
@@ -24,6 +22,10 @@ RSpec.describe SessionsController, type: :controller do
         get :create, params: { email: email, password: password }
         expect(session[:current_user_id]).to_not be_nil
       end
+      it "sets the flash notice message" do
+        get :create, params: { email: email, password: password }
+        expect(flash[:notice]).to eq("Welcome Back!")
+      end
     end
     context "with invalid_password" do
       let(:bad_password) { "badpassword" }
@@ -32,6 +34,10 @@ RSpec.describe SessionsController, type: :controller do
         get :create, params: { email: email, password: bad_password }
         expect(response).to redirect_to(new_session_path)
       end
+      it "sets the flash error message" do
+        get :create, params: { email: email, password: bad_password }
+        expect(flash[:error]).to eq("Could not log you in")
+      end
     end
     context "with invalid_email" do
       let(:bad_email) { "bademail" }
@@ -39,6 +45,10 @@ RSpec.describe SessionsController, type: :controller do
       it "redirects to the login page" do
         get :create, params: { email: bad_email, password: password }
         expect(response).to redirect_to(new_session_path)
+      end
+      it "sets the flash error message" do
+        get :create, params: { email: bad_email, password: password }
+        expect(flash[:error]).to eq("Could not log you in")
       end
     end
   end
@@ -51,6 +61,10 @@ RSpec.describe SessionsController, type: :controller do
     it "destroys the users session" do
       get :destroy
       expect(session[:current_user_id]).to be_nil
+    end
+    it "sets the flash notice message" do
+      get :destroy
+      expect(flash[:notice]).to eq("You've successfully logged out!")
     end
   end
 
