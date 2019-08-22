@@ -2,18 +2,14 @@ class SpacesController < ApplicationController
   before_action :require_login
   before_action :set_space, only: [:show, :edit, :update, :destroy]
 
+  rescue_from Pundit::NotAuthorizedError, with: :resource_not_found
+
   def index
     @spaces = policy_scope(Space)
   end
 
-  def show
-  end
-
   def new
     @space = Space.new
-  end
-
-  def edit
   end
 
   def create
@@ -40,10 +36,14 @@ class SpacesController < ApplicationController
 
   private
     def set_space
-      @space = Space.find(params[:id])
+      @space = authorize Space.find(params[:id])
     end
 
     def space_params
       params.require(:space).permit(:name, :description)
+    end
+
+    def resource_not_found
+      raise ActiveRecord::RecordNotFound
     end
 end
