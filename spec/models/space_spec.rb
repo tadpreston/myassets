@@ -8,6 +8,7 @@ RSpec.describe Space, type: :model do
   end
 
   it { should belong_to(:user) }
+  it { should have_many(:lists) }
 
   it { should validate_presence_of(:name) }
 end
