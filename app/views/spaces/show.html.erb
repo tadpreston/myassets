@@ -1,17 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @space.user_id %>
-</p>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse"
+              data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to @space.name, @space, class: 'navbar-brand' %>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <%= render partial: "space_menu_item", collection: space_list_without_current(@space.name), as: :space_menu_item %>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <p>
-  <strong>Name:</strong>
-  <%= @space.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
   <%= @space.description %>
 </p>
 
