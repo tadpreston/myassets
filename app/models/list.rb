@@ -1,5 +1,5 @@
 class List < ApplicationRecord
-  belongs_to :space
+  belongs_to :group
 
   validates :title, presence: true
 end

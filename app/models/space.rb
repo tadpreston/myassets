@@ -1,6 +1,6 @@
 class Space < ApplicationRecord
   belongs_to :user
-  has_many :lists
+  has_many :groups
 
   validates :name, presence: true
 end
