@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :group do
-    space { nil }
+    space
     title { "MyString" }
     description { "MyText" }
   end
