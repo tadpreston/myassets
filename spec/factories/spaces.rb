@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :space do
-    user_id { nil }
+    user
     name { "MyText" }
     description { "MyText" }
   end
