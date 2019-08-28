@@ -1,11 +1,15 @@
 class SpacesController < ApplicationController
   before_action :require_login
-  before_action :set_space, only: [:show, :edit, :update, :destroy]
+  before_action :set_space, only: [:edit, :update, :destroy]
 
   rescue_from Pundit::NotAuthorizedError, with: :resource_not_found
 
   def index
     @spaces = policy_scope(Space)
+  end
+
+  def show
+    @space = authorize SpaceRetriever.new(params[:id]), policy_class: SpacePolicy
   end
 
   def new

@@ -4,12 +4,16 @@ class SpaceRetriever
     @space_id = space_id
   end
 
-  def space_name
+  def name
     space.name
   end
 
-  def space_description
+  def description
     space.description
+  end
+
+  def user_id
+    space.user_id
   end
 
   def group_titles

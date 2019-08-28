@@ -12,12 +12,12 @@ RSpec.describe SpaceRetriever, type: :concern do
 
   describe "#space_name" do
     it "returns the space name" do
-      expect(subject.space_name).to eq(space.name)
+      expect(subject.name).to eq(space.name)
     end
   end
   describe "#space_description" do
     it "returns the space description" do
-      expect(subject.space_description).to eq(space.description)
+      expect(subject.description).to eq(space.description)
     end
   end
   describe "#group_titles" do
